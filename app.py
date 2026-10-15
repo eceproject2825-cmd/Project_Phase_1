@@ -135,4 +135,61 @@ ef live_dashboard():
 
     st.divider()
 
-    st.subheader("Sensor
+    st.subheader("Sensor Trends")
+
+    chart_data = data.copy()
+    chart_data["timestamp"] = pd.to_datetime(
+        chart_data["timestamp"]
+        )
+
+    chart_data = chart_data.sort_values(
+        "timestamp"
+        )
+    chart_data = chart_data.set_index(
+        "timestamp"
+        )
+
+    st.write("🌡️ Temperature")
+    st.line_chart(
+       chart_data["temperature"]
+       )
+
+    st.write("📳 Vibration")
+    st.line_chart(
+       chart_data["vibration"]
+       )
+
+    st.write("⚡Current")
+    st.line_chart(
+       chart_data["current"]
+       )
+
+       
+    st.write("🔄 RPM")
+    st.line_chart(
+      chart_data["rpm"]
+      )
+
+    st.write("🏥 Machine Health")
+    st.line_chart(
+       chart_data["health_index"]
+       )
+
+    st.write("🚨 AI Anomaly Score")
+    st.line_chart(
+       chart_data["anomaly_score"]
+       )
+
+    st.divider()
+    st.subheader("🗄️ Database Information")
+    st.write(
+        f"Latest database reading: "
+        f"**{latest['timestamp']}**"
+    )
+    st.write(
+        f"**{len(chart_data)} records displayed**"
+        )
+
+  live_dashboard()
+      
+    
