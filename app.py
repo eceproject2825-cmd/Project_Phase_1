@@ -63,19 +63,76 @@ ef live_dashboard():
 
    with col2:
    st.metric(
-       " Health",
+       "🏥 Health",
        f"{latest['health_index']:.0f}%"
        )
 
    with col3:
        st.metric(
-           " Vibration",
+           "📳 Vibration",
            f"{latest['vibration']:.2f} mm/s"
            )
 
     with col4:
          st.metric(
-             " Anomaly Score",
+             "🚨 Anomaly Score",
              f"{latest['anomaly_score']:.0f}"
              )
-  
+    col5, col6, col7, col8 = st.columns(4)
+
+    with col5:
+        st.metric(
+            "⚡ Current",
+            f"{latest['current']:.2f} A"
+            )
+
+    with col6:
+         st.metric(
+             "🔄 RPM",
+             f"{int(latest['rpm'])}"
+             )
+
+    with col7:
+        st.metric(
+            "📊 Status",
+            latest["status"]
+            )
+
+    with col8:
+         st.metric(
+             "🤖 AI Status",
+             latest['anomaly_status']
+             )
+
+    st.divider()
+
+    st.subheader("Machine Status")
+    status = str(latest["status"]).upper()
+    if status == "NORMAL":
+        st.success("🟢 NORMAL")
+    elif status = "WARNING":
+       st.warning("🟡 WARNING")
+    else:
+      st.error("🔴 CRITICAL")
+
+    st.write(
+        f"Last updated: **{latest['timestamp']}**"
+        )
+    st.divider()
+
+    st.subheader("AI Anomaly Detection")
+    ai_status = str(latest["anomaly_status"]).upper()
+    if ai_status == "NORMAL":
+       st.success("🟢 NORMAL")
+    elif ai_status == "WARNING":
+      st.warning("🟡 WARNING")
+    else:
+      st.error("🔴 CRITICAL")
+
+    st.write(
+      f"Anomaly Score: **{latest['anomaly_score']:.0f}**"
+      )
+
+    st.divider()
+
+    st.subheader("Sensor
