@@ -223,3 +223,43 @@ if __name__ == "__main__":
   print(
      "INDUSTRIAL DIGITAL TWIN - DATABASE MANAGER"
   )
+   print("=" * 60)
+   print()
+   initialize_database()
+   print()
+   print("Connecting to MQTT broker...")
+   print("Broker  :", BROKER)
+   print("Port    :", PORT)
+   print("Topic   :", TOPIC)
+   print()
+
+   client = mqtt.Client(
+      mqtt.CallbackAPIVersion.VERSION2,
+      client_id = "industrial_database_manager"
+   )
+   client.on_connect = on_connect
+   client.on_message = on_message
+   try:
+      client.connect(
+         BROKER,
+         PORT,
+         60
+      )
+      client.loop_forever()
+
+except KeyboardInterrupt:
+    print()
+    print(
+       "Stopping database manager..."
+    )
+except Exception as error:
+    print(
+       "Database manager error:",
+       error
+    )
+finally:
+    client.disconnect()
+    print(
+       "Database manager stopped."
+    )
+      
