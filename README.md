@@ -8,4 +8,4 @@
 
 ### Reference Circuit 3
 
-![Reference Circuit 3](
+![Reference Circuit 3](https://github.com/eceproject2825-cmd/Project_Phase_1/blob/Reference-Circuits/Ref_Circuit_3.jpeg?raw=true)
